@@ -6,11 +6,10 @@ RUN apk update
 RUN apk add openssh openrc --no-cache --upgrade
 RUN apk add bash --no-cache --upgrade
 RUN rc-update add sshd
-# rc-service syslog start
 RUN chmod +x /start.sh
 ENV PGADMIN_DEFAULT_EMAIL=initial@postgres.com
 ENV PGADMIN_DEFAULT_PASSWORD=postgres
-#ENV SSH_KEY="removed"
+# ENV SSH_KEY="removed"
 EXPOSE 443 80 22
-#CMD ["/start.sh" ]
+# CMD ["/start.sh" ]
 ENTRYPOINT ["/start.sh" ]
