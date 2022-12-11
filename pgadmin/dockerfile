@@ -1,0 +1,16 @@
+FROM dpage/pgadmin4:latest
+COPY . /
+USER root
+VOLUME [ "/sys/fs/cgroup" ]
+RUN apk update
+RUN apk add openssh openrc --no-cache --upgrade
+RUN apk add bash --no-cache --upgrade
+RUN rc-update add sshd
+# rc-service syslog start
+RUN chmod +x /start.sh
+ENV PGADMIN_DEFAULT_EMAIL=initial@postgres.com
+ENV PGADMIN_DEFAULT_PASSWORD=postgres
+#ENV SSH_KEY="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDkndohitgiscoQwMHHcShT4PcAn/YX/BcSqJ233rdE29RPWC06HuyUTrWGdwnPRLGEa2dA06l8TYgrSIbcEug3pS8m3beoyVZZR84bSRs1xGcjnpyNNWQdwLbMQaClRaIYSS3KnPzse8lxUExVaYTMwofgZc2moGc76GqhhRz+dalS4Y0fglPNOeCPV8rm9y86+2OopFeRxarDjh9Pmf1IRUqmfIvuGoQoJz3bOjJOrW/0aKGxmrkbSMSe9+I72NjLpLy06Qp901ktH01UH6YxdsaYcDp2jqOhhATKjS9jrQmLFL8aBausisnLJrCdryxM6DV7VpoDIqBD5yJXF8iCneGS0R717HvRCklCZCk7v49zaaNmsoUXhuklKbFebKritgSY9v3TRyhCO27GLifxmjWaLrZ2DE9HtEbAfc3vcb/RRwya2f/Z0IA0yQu25/UGdRaPNhXG8B4gJ8mxMpmztYH2mSHFDa8LOXpusKoa1bdVwMrKkvL0j9m5D6gM7JrHFKY9NGyK0YvqDLeQiz0lt8MIIua2QJtRdSRXt9nG4u1XD/AHGoYkawAl6CXeVinta711ZP6L+A/tyxXa+TJSk0elo42C2hwzf/RIYtR4fXuFu/ySLR/1D69VzYDade+xETrdI9GAws2XAy83BljKY25IqFo+J89rIZW5EPtsMQ=="
+EXPOSE 443 80 22
+#CMD ["/start.sh" ]
+ENTRYPOINT ["/start.sh" ]

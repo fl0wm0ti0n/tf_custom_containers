@@ -1,0 +1,5 @@
+*.tar.gz filter=lfs diff=lfs merge=lfs -text
+/postgres/*.tar.gz filter=lfs diff=lfs merge=lfs -text
+/pgadmin/*.tar.gz filter=lfs diff=lfs merge=lfs -text
+postgres/postgres_ssh_20221210.tar.gz filter=lfs diff=lfs merge=lfs -text
+pgadmin/pgadmin_ssh_20221210.tar.gz filter=lfs diff=lfs merge=lfs -text
